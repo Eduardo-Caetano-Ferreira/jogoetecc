@@ -236,7 +236,7 @@ export default function App() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = `/skins/${P1_SKIN_FILES[p1Skin - 1]}`;
+    img.src = `${import.meta.env.BASE_URL}skins/${P1_SKIN_FILES[p1Skin - 1]}`;
     img.onload = () => {
       p1ImgRef.current = img;
       setP1ImgUrl(img.src);
@@ -263,7 +263,7 @@ export default function App() {
 
   useEffect(() => {
     const img = new Image();
-    img.src = `/skins/${P2_SKIN_FILES[p2Skin - 1]}`;
+    img.src = `${import.meta.env.BASE_URL}skins/${P2_SKIN_FILES[p2Skin - 1]}`;
     img.onload = () => {
       p2ImgRef.current = img;
       setP2ImgUrl(img.src);
