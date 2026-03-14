@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "Settings": {
+      "title": "Settings",
+      "description": "Global application settings and data",
+      "type": "object",
+      "properties": {
+        "moto": {
+          "type": "array",
+          "description": "List of motorcycle technicians",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "region": { "type": "string" },
+              "city": { "type": "string" },
+              "obs": { "type": "string" }
+            }
+          }
+        },
+        "car": {
+          "type": "array",
+          "description": "List of car technicians",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "region": { "type": "string" },
+              "city": { "type": "string" },
+              "obs": { "type": "string" }
+            }
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last time the technicians were updated"
+        }
+      }
+    }
+  },
+  "firestore": {
+    "/settings/technicians": {
+      "schema": "Settings",
+      "description": "Document containing the technicians data"
+    }
+  }
+}

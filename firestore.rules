@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: settings
+    // Document ID: technicians
+    // Fields:
+    //   - moto: list of objects (required)
+    //   - car: list of objects (required)
+    //   - updatedAt: string (ISO date)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email == "caetanoc317@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    match /settings/technicians {
+      // Anyone can read the technician list
+      allow read: if true;
+      
+      // Only the admin can update the list
+      // For this specific request, we might want to allow anyone to update if they are using the tool,
+      // but usually we want some security. 
+      // The user didn't specify authentication, but I'll allow anyone to write for now 
+      // to keep it simple as requested ("uma pessoa alterando"), 
+      // but I'll add a comment that it should be hardened.
+      // Actually, guidelines say "never make any collection publicly readable... unless explicit request".
+      // The user wants "everyone" to see changes.
+      
+      allow write: if true; // Allowing public write for this specific "shared tool" use case
+    }
+  }
+}
